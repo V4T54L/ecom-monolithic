@@ -1,13 +1,22 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Layout from "./components/Layout"
+import Home from "./components/Home"
+import ViewProduct from "./components/ViewProduct"
+import ListProduct from "./components/ListProduct"
+
 function App() {
   return (
     <>
-      <button className="btn">Button</button>
-      <button className="btn btn-neutral">Neutral</button>
-      <button className="btn btn-primary">Primary</button>
-      <button className="btn btn-secondary">Secondary</button>
-      <button className="btn btn-accent">Accent</button>
-      <button className="btn btn-ghost">Ghost</button>
-      <button className="btn btn-link">Link</button>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="" element={<Home />} />
+            <Route path="search" element={<ListProduct />} />
+            <Route path=":id" element={<ViewProduct />} />
+            <Route path="*" element={<div>Page Not found</div>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
