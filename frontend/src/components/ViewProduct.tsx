@@ -1,6 +1,7 @@
 import React from 'react'
 import { useStoreContext } from '../contexts/StoreContext'
 import { useNavigate } from 'react-router-dom'
+import Rating from './Rating'
 
 const ViewProduct: React.FC = () => {
     const { productDetail, loading, error, addProductToCart } = useStoreContext()
@@ -54,7 +55,8 @@ const ViewProduct: React.FC = () => {
                                 <span className="text-2xl">${productDetail.price.toFixed(2)}</span>
                             )}
                         </p>
-                        <p className="text-yellow-500 mt-2">Rating: {productDetail.rating.toFixed(1)} ⭐</p>
+                        <Rating stars={productDetail.rating} />
+
                         <p className="mt-4">{productDetail.description}</p>
                         <button onClick={() => addProductToCart(productDetail)} className="btn btn-primary mt-8">Add to cart</button>
                     </div>
@@ -94,7 +96,7 @@ const ViewProduct: React.FC = () => {
                         productDetail.reviews.map((review, index) => (
                             <div key={index} className="border p-4 rounded-lg mt-4">
                                 <p className="text-gray-500"><strong>{review.reviewerName}</strong> - {review.date}</p>
-                                <p className="text-yellow-500">Rating: {review.rating} ⭐</p>
+                                <Rating stars={review.rating} />
                                 <p>{review.comment}</p>
                             </div>
                         ))
@@ -105,10 +107,9 @@ const ViewProduct: React.FC = () => {
                         <h2 className="text-2xl font-semibold">Related Products</h2>
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
                             {productDetail.relatedProducts.map((relatedProduct) => (
-                                <div key={relatedProduct.id} className="border rounded-lg p-4">
+                                <div key={relatedProduct.id} className="border rounded-lg p-4 flex flex-col h-full">
                                     <img src={relatedProduct?.thumbnail} alt={relatedProduct.title} className="w-full h-40 object-cover rounded-t-lg" />
-                                    <h3 className="text-xl font-semibold mt-2">{relatedProduct.title}</h3>
-                                    {/* <p className="text-gray-600">${relatedProduct.price.toFixed(2)}</p> */}
+                                    <h3 className="flex-1 text-xl font-semibold mt-2">{relatedProduct.title}</h3>
                                     {
                                         relatedProduct.discountedPrice ? (
                                             <div className='flex items-end gap-2'>
@@ -119,8 +120,10 @@ const ViewProduct: React.FC = () => {
                                             <div className="text-xl">${relatedProduct.price}</div>
                                         )
                                     }
-                                    <button onClick={() => viewProduct(relatedProduct.id)} className="btn btn-ghost">View Product</button>
+                                    <Rating stars={relatedProduct.rating} />
+                                    <button onClick={() => viewProduct(relatedProduct.id)} className="btn btn-primary w-full">View Product</button>
                                 </div>
+
                             ))}
                         </div>
                     </div>

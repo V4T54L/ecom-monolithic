@@ -2,6 +2,7 @@ import React, { FormEvent, useEffect, useState } from 'react'
 import { title } from '../constants'
 import { useStoreContext } from '../contexts/StoreContext'
 import { useNavigate } from 'react-router-dom'
+import ThemeProvider from './ThemeProvider'
 
 const Navbar: React.FC = () => {
 
@@ -12,10 +13,7 @@ const Navbar: React.FC = () => {
 
     useEffect(() => {
         console.log("Items : ", cart.items)
-        let quantity = 0
-        for (const item of cart.items) {
-            quantity += item.quantity
-        }
+        const quantity = cart.items.reduce((total, item) => total + item.quantity, 0)
         setItemCount(quantity)
     }, [cart])
 
@@ -29,10 +27,13 @@ const Navbar: React.FC = () => {
             <div className="flex-1">
                 <button onClick={() => navigate("/")} className="btn btn-ghost text-xl">{title}</button>
             </div>
+            <form onSubmit={handleFormSubmit} className="flex-1 form-control">
+                <input type="text" placeholder="Search" value={query} onChange={(e) => setQuery(e.target.value)} className="input input-bordered w-24 md:w-full" />
+            </form>
+            <div className="mx-8">
+                <ThemeProvider />
+            </div>
             <div className="flex-none gap-2">
-                <form onSubmit={handleFormSubmit} className="form-control">
-                    <input type="text" placeholder="Search" value={query} onChange={(e) => setQuery(e.target.value)} className="input input-bordered w-24 md:w-auto" />
-                </form>
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                         <div className="indicator">
@@ -58,7 +59,7 @@ const Navbar: React.FC = () => {
                             <span className="text-lg font-bold">{itemCount} Items</span>
                             <span className="text-info">Subtotal: ${cart.totalAmount}</span>
                             <div className="card-actions">
-                                <button className="btn btn-primary btn-block">View cart</button>
+                                <button onClick={() => navigate("/cart")} className="btn btn-primary btn-block">View cart</button>
                             </div>
                         </div>
                     </div>

@@ -3,7 +3,7 @@ import React from 'react'
 const Promotions: React.FC = () => {
     return (
         <>
-            <div className="carousel w-full">
+            <div className="carousel">
                 <div id="item1" className="carousel-item w-full">
                     <img
                         src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"

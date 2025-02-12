@@ -9,6 +9,8 @@ interface StoreContextProps {
     loading: boolean; error: string | null; cart: Cart;
     addProductToCart: (product: ProductInfo) => void;
     removeProductFromCart: (product: ProductInfo) => void;
+    isDarkMode: boolean;
+    themeToggleFunc: () => void;
 }
 
 const StoreContext = createContext<StoreContextProps | null>(null)
@@ -20,6 +22,7 @@ const StoreContextProvider: React.FC<StoreContextProviderProps> = ({ children })
     const [products, setProducts] = useState<ProductInfo[]>([]);
     const [productDetail, setProductDetail] = useState<ProductDetail>();
     const [loading, setLoading] = useState<boolean>(true);
+    const [isDarkMode, setDarkMode] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [cart, setCart] = useState<Cart>({
         items: [],
@@ -31,26 +34,26 @@ const StoreContextProvider: React.FC<StoreContextProviderProps> = ({ children })
     };
 
     const addProductToCart = (product: ProductInfo) => {
+        console.log("Adding : ", product.title)
         setCart(prev => {
             const existingCartItemIndex = prev.items.findIndex(item => item.id === product.id);
 
             const updatedItems = [...prev.items];
             if (existingCartItemIndex > -1) {
                 updatedItems[existingCartItemIndex].quantity += 1;
-
-                return {
-                    items: updatedItems,
-                    totalAmount: updateTotalAmount(updatedItems),
-                };
             } else {
                 updatedItems.push({ ...product, quantity: 1 })
-                return {
-                    items: updatedItems,
-                    totalAmount: updateTotalAmount(updatedItems),
-                };
             }
+            return {
+                items: updatedItems,
+                totalAmount: updateTotalAmount(updatedItems),
+            };
         });
     };
+
+    const themeToggleFunc = () => {
+        setDarkMode(prev => !prev)
+    }
 
     const removeProductFromCart = (product: ProductInfo) => {
         setCart(prev => {
@@ -109,6 +112,8 @@ const StoreContextProvider: React.FC<StoreContextProviderProps> = ({ children })
             cart,
             addProductToCart,
             removeProductFromCart,
+            isDarkMode,
+            themeToggleFunc,
         }}>
             {children}
         </StoreContext.Provider>

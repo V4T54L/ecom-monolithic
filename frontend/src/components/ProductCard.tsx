@@ -2,6 +2,7 @@ import React from 'react'
 import { ProductInfo } from '../types'
 import { useStoreContext } from '../contexts/StoreContext'
 import { useNavigate } from 'react-router-dom'
+import Rating from './Rating'
 
 interface ProductCardProps {
     product: ProductInfo
@@ -27,21 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 <h2 className="card-title text-lg">{product.title}</h2>
                 <p className='text-xs'>{product.description}</p>
 
-                <div className="flex items-center my-2">
-                    {/* Generate filled stars based on the rating */}
-                    {Array.from({ length: 5 }, (_, index) => (
-                        <svg
-                            key={index}
-                            className={`w-5 h-5 ${index < Math.floor(product.rating) ? 'text-yellow-500' : 'text-gray-300'}`}
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                        >
-                            <path d="M10 15l-5.878 3.09 1.119-6.517L0 6.18l6.545-.952L10 0l2.455 5.228 6.545.952-4.241 3.393 1.119 6.517z" />
-                        </svg>
-                    ))}
-                    {/* Display the rating number */}
-                    <span className="text-sm ml-2">{product.rating.toFixed(1)}</span>
-                </div>
+                <Rating stars={product.rating} />
                 {
                     product.discountedPrice ? (
                         <div className='flex items-end gap-2'>
