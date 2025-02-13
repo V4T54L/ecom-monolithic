@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { useStoreContext } from "../contexts/StoreContext";
 
 const ViewCart: React.FC = () => {
     const { cart, removeProductFromCart } = useStoreContext()
+    const navigate = useNavigate();
     return (
         <div className="max-w-3xl mx-auto p-4">
             <h1 className="text-2xl font-bold mb-4">Shopping Cart</h1>
@@ -42,7 +44,7 @@ const ViewCart: React.FC = () => {
                     <div className="mt-4 flex justify-between items-center">
                         <span className="text-xl font-semibold">Total Amount: ${cart.totalAmount.toFixed(2)}</span>
                         <button
-                            // onClick={onCheckout}
+                            onClick={()=>navigate("/checkout")}
                             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                         >
                             Checkout

@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
     }
 
     return (
-        <div className="navbar bg-base-100 sticky top-0 z-10">
+        <div className="navbar bg-base-100 sticky top-0 z-10 flex-wrap">
             <div className="flex-1">
                 <button onClick={() => navigate("/")} className="btn btn-ghost text-xl">{title}</button>
             </div>
@@ -76,10 +76,10 @@ const Navbar: React.FC = () => {
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                         <li>
-                            <a className="justify-between">
+                            <button onClick={() => { navigate("/profile") }} className="justify-between">
                                 Profile
                                 <span className="badge">New</span>
-                            </a>
+                            </button>
                         </li>
                         <li><a>Settings</a></li>
                         <li><a>Logout</a></li>

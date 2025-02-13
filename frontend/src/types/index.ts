@@ -35,4 +35,20 @@ interface Cart {
     items: CartItem[];
 }
 
-export type { ProductInfo, Review, ProductDetail, Cart, CartItem }
+interface Address {
+    address: string;
+    city: string;
+    zipCode: string;
+}
+
+interface User {
+    name: string;
+    username: string;
+    email: string;
+    role: string;
+    memberSince: string;
+    addresses: Address[];
+}
+
+
+export type { ProductInfo, Review, ProductDetail, Cart, CartItem, User, Address }
