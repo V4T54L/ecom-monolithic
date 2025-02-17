@@ -318,7 +318,7 @@ VALUES (
     );
 
 INSERT INTO
-    categories (name, start, end)
+    categories (name, start_idx, end_idx)
 VALUES (
         'Electronics',
         '2023-01-01',
@@ -775,7 +775,7 @@ VALUES
 (10, 10, 5, 'Perfect for my collection, love it!', NOW()),
 (11, 11, 2, 'Deflated quickly, not as durable as expected.', NOW()),
 (12, 12, 4, 'Great kit, but missing a few items.', NOW()),
-(13, 13, 5, 'Best apples I\'ve ever tasted!', NOW()),
+(13, 13, 5, 'Best apples I have ever tasted!', NOW()),
 (14, 14, 4, 'Good oil for my car, will buy again!', NOW()),
 (15, 15, 5, 'Incredibly useful set, great quality!', NOW()),
 (16, 16, 3, 'It works fine, but nothing special.', NOW()),
@@ -870,7 +870,7 @@ VALUES (
         5,
         20.99,
         5,
-        6,
+        4,
         'pending',
         'pending',
         NOW(),
@@ -880,7 +880,7 @@ VALUES (
         6,
         179.98,
         6,
-        7,
+        3,
         'completed',
         'delivered',
         NOW(),
@@ -940,7 +940,7 @@ VALUES (
         12,
         29.99,
         12,
-        6,
+        1,
         'pending',
         'pending',
         NOW(),

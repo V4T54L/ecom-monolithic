@@ -49,9 +49,9 @@ CREATE INDEX idx_addresses_user_id ON addresses (user_id);
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE,
-    start DATE,
-    end DATE,
-    CONSTRAINT check_start_before_end CHECK (start <= end)
+    start_idx DATE,
+    end_idx DATE,
+    CONSTRAINT check_start_before_end CHECK (start_idx <= end_idx)
 );
 
 CREATE TABLE products (
