@@ -11,6 +11,12 @@ import (
 )
 
 func TestNewPostgreSQLDB(t *testing.T) {
+	t.Run("returns nil and error when nil connector provided", func(t *testing.T) {
+		database, err := NewPostgreSQLDB("test_uri", 10, 10, nil)
+		require.Error(t, err)
+		require.Nil(t, database)
+	})
+
 	t.Run("returns nil and error when Open fails", func(t *testing.T) {
 		db, mock, err := sqlmock.New()
 		require.NoError(t, err)
