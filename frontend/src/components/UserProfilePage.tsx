@@ -18,12 +18,15 @@ const UserProfilePage: React.FC = () => {
         const fetchUserProfile = async () => {
             try {
                 setLoading(true);
-                const { user } = await GetProfile()
-                setUser({
-                    id: user.id, email: user.email, name: user.name,
-                    memberSince: user.created_at, role: user.role,
-                    username: user.username, addresses: [],
-                });
+                const resp = await GetProfile()
+                console.log("User response : ", resp.user)
+                const userObj: User = {
+                    id: resp.user.id, email: resp.user.email, name: resp.user.name,
+                    memberSince: resp.user.created_at, role: resp.user.role,
+                    username: resp.user.username, addresses: [],
+                }
+                // console.log("User obj : ", userObj)
+                setUser(userObj);
                 setTempUser(mockUser);
                 setError(null);
             } catch (err) {
@@ -39,6 +42,10 @@ const UserProfilePage: React.FC = () => {
 
         fetchUserProfile();
     }, []);
+
+    useEffect(() => {
+        console.log("User Changed : ", user)
+    }, [user])
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         if (!tempUser) return;

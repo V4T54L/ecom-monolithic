@@ -31,10 +31,7 @@ func (u *userHandler) LoginHandler(ctx *gin.Context) {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
 
-	// TODO: Update the cookie domain if it doesn't work
-	ctx.SetCookie("ServerToken", token, 3600, "", "localhost", false, true)
-
-	ctx.JSON(http.StatusOK, gin.H{"user": userDetails})
+	ctx.JSON(http.StatusOK, gin.H{"user": userDetails, "token": token})
 }
 
 func (u *userHandler) SignupHandler(ctx *gin.Context) {
@@ -65,5 +62,5 @@ func (u *userHandler) GetUserDetails(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusCreated, gin.H{"user": user})
+	ctx.JSON(http.StatusOK, gin.H{"user": user})
 }

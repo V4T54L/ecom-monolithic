@@ -65,6 +65,11 @@ interface UserDetailResponse {
     user: UserInfo;
 }
 
+interface LoginResponse {
+    user: UserInfo;
+    token: string;
+}
+
 interface MessageResponse {
     message: string;
 }
@@ -77,5 +82,5 @@ interface ErrorResponse {
 export type {
     ProductInfo, Review, ProductDetail, Cart,
     CartItem, User, Address, UserDetailResponse, ErrorResponse,
-    UserInfo, MessageResponse
+    UserInfo, MessageResponse, LoginResponse,
 }

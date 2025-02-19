@@ -1,4 +1,4 @@
-import { MessageResponse, UserDetailResponse } from '../types';
+import { LoginResponse, MessageResponse, UserDetailResponse } from '../types';
 import instance from './axios';
 
 const AUTH_BASE_URI = '/auth';
@@ -14,11 +14,13 @@ const Signup = async (name: string, username: string, email: string, password: s
     }
 };
 
-const Login = async (username: string, password: string): Promise<UserDetailResponse> => {
+const Login = async (username: string, password: string): Promise<LoginResponse> => {
     const endpoint = `${AUTH_BASE_URI}/login`;
     try {
-        const response = await instance.axios.post<UserDetailResponse>(endpoint, { username, password });
-        return response.data;
+        const response = await instance.axios.post<LoginResponse>(endpoint, { username, password });
+        const data = response.data;
+        instance.token = data.token;
+        return data;
     } catch (error) {
         console.error("Error logging in:", error);
         throw error;

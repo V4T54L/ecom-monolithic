@@ -10,14 +10,12 @@ import (
 
 func AuthMiddleware(tokenValidatorFunc func(token string) (*models.AuthToken, error)) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		token, err := ctx.Cookie("ServerToken")
-		if err != nil {
-			authHeader := ctx.GetHeader("Authorization")
-			if authHeader != "" {
-				parts := strings.Split(authHeader, " ")
-				if len(parts) == 2 && strings.ToLower(parts[0]) == "bearer" {
-					token = parts[1]
-				}
+		token := ""
+		authHeader := ctx.GetHeader("Authorization")
+		if authHeader != "" {
+			parts := strings.Split(authHeader, " ")
+			if len(parts) == 2 && strings.ToLower(parts[0]) == "bearer" {
+				token = parts[1]
 			}
 		}
 

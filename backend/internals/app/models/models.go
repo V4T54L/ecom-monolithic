@@ -12,13 +12,13 @@ type User struct {
 }
 
 type AuthToken struct {
-	ID        int
-	Name      string
-	Username  string
-	Email     string
-	Role      string
-	CreatedAt string
-	UpdatedAt string
+	ID        int    `json:"id"`
+	Name      string `json:"name"`
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	Role      string `json:"role"`
+	CreatedAt string `json:"created_at"`
+	UpdatedAt string `json:"updated_at"`
 }
 
 // type Address struct {
