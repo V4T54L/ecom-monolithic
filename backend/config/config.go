@@ -41,31 +41,31 @@ func NewConfig() (*Config, error) {
 		instance.HashSecret = []byte(val)
 	}
 
-	if val, err := getStr("HOST", nil); err == nil {
+	if val, err := getStr("DB_HOST", nil); err == nil {
 		instance.DBHost = val
 	} else {
 		return nil, err
 	}
 
-	if val, err := getStr("USER", nil); err == nil {
+	if val, err := getStr("DB_USER", nil); err == nil {
 		instance.DBUser = val
 	} else {
 		return nil, err
 	}
 
-	if val, err := getStr("PASSWORD", nil); err == nil {
+	if val, err := getStr("DB_PASSWORD", nil); err == nil {
 		instance.DBPassword = val
 	} else {
 		return nil, err
 	}
 
-	if val, err := getStr("DB", nil); err == nil {
+	if val, err := getStr("DB_Name", nil); err == nil {
 		instance.DBName = val
 	} else {
 		return nil, err
 	}
 
-	if val, err := getStr("PORT", nil); err == nil {
+	if val, err := getStr("DB_PORT", nil); err == nil {
 		instance.DBPort = val
 	} else {
 		return nil, err

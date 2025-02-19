@@ -12,11 +12,11 @@ import (
 func setup(t *testing.T, setRequired, setOptional bool) []string {
 	envVars := make([]string, 0, 10)
 	if setRequired {
-		t.Setenv("HOST", "localhost")
-		t.Setenv("USER", "testuser")
-		t.Setenv("PASSWORD", "testpass")
-		t.Setenv("DB", "testdb")
-		t.Setenv("PORT", "5432")
+		t.Setenv("DB_HOST", "localhost")
+		t.Setenv("DB_USER", "testuser")
+		t.Setenv("DB_PASSWORD", "testpass")
+		t.Setenv("DB_NAME", "testdb")
+		t.Setenv("DB_PORT", "5432")
 		t.Setenv("MAX_OPEN_CONNS", "10")
 		t.Setenv("MAX_IDLE_CONNS", "5")
 		envVars = append(envVars, "HOST", "USER", "PASSWORD", "DB", "PORT", "MAX_OPEN_CONNS", "MAX_IDLE_CONNS")
@@ -89,11 +89,11 @@ func TestNewConfigWithErrorRequiredFields(t *testing.T) {
 		value string
 	}{
 		{"required HOST", "", ""},
-		{"required USER", "HOST", "tmp"},
-		{"required PASSWORD", "USER", "tmp"},
-		{"required DB", "PASSWORD", "tmp"},
-		{"required PORT", "DB", "tmp"},
-		{"required MAX_IDLE_CONNS", "PORT", "tmp"},
+		{"required USER", "DB_HOST", "tmp"},
+		{"required PASSWORD", "DB_USER", "tmp"},
+		{"required DB", "DB_PASSWORD", "tmp"},
+		{"required PORT", "DB_NAME", "tmp"},
+		{"required MAX_IDLE_CONNS", "DB_PORT", "tmp"},
 		{"required MAX_OPEN_CONNS", "MAX_IDLE_CONNS", "12"},
 	}
 
