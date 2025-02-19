@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Address, User } from '../types';
 import { Pencil, Save, XCircle, Plus, Trash2 } from 'lucide-react';
 import { mockUser } from '../mock/user';
+import { GetProfile } from '../api/user';
 
 
 const UserProfilePage: React.FC = () => {
@@ -17,8 +18,12 @@ const UserProfilePage: React.FC = () => {
         const fetchUserProfile = async () => {
             try {
                 setLoading(true);
-                // TODO: Make API call
-                setUser(mockUser);
+                const { user } = await GetProfile()
+                setUser({
+                    id: user.id, email: user.email, name: user.name,
+                    memberSince: user.created_at, role: user.role,
+                    username: user.username, addresses: [],
+                });
                 setTempUser(mockUser);
                 setError(null);
             } catch (err) {

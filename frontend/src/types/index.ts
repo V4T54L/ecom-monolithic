@@ -42,6 +42,7 @@ interface Address {
 }
 
 interface User {
+    id?: number;
     name: string;
     username: string;
     email: string;
@@ -50,5 +51,31 @@ interface User {
     addresses: Address[];
 }
 
+interface UserInfo {
+    id: number;
+    name: string;
+    username: string;
+    email: string;
+    role: string;
+    created_at: string;
+    updated_at: string;
+}
 
-export type { ProductInfo, Review, ProductDetail, Cart, CartItem, User, Address }
+interface UserDetailResponse {
+    user: UserInfo;
+}
+
+interface MessageResponse {
+    message: string;
+}
+
+interface ErrorResponse {
+    error: string;
+}
+
+
+export type {
+    ProductInfo, Review, ProductDetail, Cart,
+    CartItem, User, Address, UserDetailResponse, ErrorResponse,
+    UserInfo, MessageResponse
+}
